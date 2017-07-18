@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from lib.rectangle_merger import RectangleMerger as Merger
-from lib.rectangle import Rectangle
+from text_detect.rectangle_merger import RectangleMerger as Merger
+from text_detect.rectangle import Rectangle
 
 
 class TestRectangleMerger(TestCase):

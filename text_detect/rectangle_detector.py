@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import os
 import sys
-from lib.rectangle import Rectangle
+from text_detect.rectangle import Rectangle
 
 
 class RectangleDetector:
@@ -23,10 +23,10 @@ class RectangleDetector:
 
     def _text_detect(self, img, channel):
         pathname = os.path.dirname(sys.argv[0])
-        erc1 = cv2.text.loadClassifierNM1(pathname + 'lib/cfg/trained_classifierNM1.xml')
+        erc1 = cv2.text.loadClassifierNM1(pathname + 'text_detect/cfg/trained_classifierNM1.xml')
         er1 = cv2.text.createERFilterNM1(erc1, self.thresholdDelta, self.minArea, self.maxArea,
                                          self.minProbability1, self.nonMaxSuppression, self.minProbabilityDiff)
-        erc2 = cv2.text.loadClassifierNM2(pathname + 'lib/cfg/trained_classifierNM2.xml')
+        erc2 = cv2.text.loadClassifierNM2(pathname + 'text_detect/cfg/trained_classifierNM2.xml')
         er2 = cv2.text.createERFilterNM2(erc2, self.minProbability2)
         regions = cv2.text.detectRegions(channel, er1, er2)
         if self.horizontal_only:
@@ -34,7 +34,7 @@ class RectangleDetector:
         else:
             return cv2.text.erGrouping(img, channel, [x.tolist() for x in regions],
                                        cv2.text.ERGROUPING_ORIENTATION_ANY,
-                                       pathname + 'lib/cfg/trained_classifier_erGrouping.xml', 0.9)
+                                       pathname + 'text_detect/cfg/trained_classifier_erGrouping.xml', 0.9)
 
     def find_all_text_rectangles(self, img):
         # Extract channels to be processed individually

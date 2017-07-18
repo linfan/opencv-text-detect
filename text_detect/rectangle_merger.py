@@ -1,4 +1,4 @@
-from lib.rectangle import Rectangle
+from text_detect.rectangle import Rectangle
 
 
 class RectangleMerger:

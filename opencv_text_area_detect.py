@@ -3,8 +3,8 @@
 import sys
 
 import cv2
-from lib.rectangle_detector import RectangleDetector as Detector
-from lib.rectangle_merger import RectangleMerger as Merger
+from text_detect.rectangle_detector import RectangleDetector as Detector
+from text_detect.rectangle_merger import RectangleMerger as Merger
 
 if len(sys.argv) < 2:
     print(' (ERROR) You must call this script with an argument (path_to_image_to_be_processed)\n')
