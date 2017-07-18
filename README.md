@@ -11,7 +11,7 @@ Searching text in a image, an opencv based text area detect tool.
 
 ```bash
 $ pip3 install opencv-python
-$ pip3 install opencv-python
+$ pip3 install opencv-contrib-python
 ```
 
 ## Detect text
