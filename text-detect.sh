@@ -17,10 +17,9 @@ python3 opencv_text_area_detect.py ${FILE_PATH} ${OUT_DIR}
 for part in `ls ${OUT_DIR}/part-*.jpg`; do
     num=${part##*-}
     tesseract ${part} ${OUT_DIR}/result-${num}
+    cat ${OUT_DIR}/result-${num}.txt >> ${OUT_DIR}/result.txt
 done
 echo "---- RESULT ----"
-for part in `ls ${OUT_DIR}/result-*.jpg.txt`; do
-    cat ${part} | sed -e 's/^\s*//' -e 's/\s*$//' -e '/^$/d'
-done
+cat ${OUT_DIR}/result.txt
 echo "----------------"
 cp ${FILE_PATH} ${OUT_DIR}/origin.${IMAGE_FORMAT}

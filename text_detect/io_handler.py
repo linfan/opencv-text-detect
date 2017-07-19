@@ -33,7 +33,7 @@ class IoHandler:
         for i in range(0, len(rectangles)):
             r = rectangles[i]
             roi = img[r.y1:r.y2, r.x1:r.x2]
-            cv2.imwrite("%spart-%02d.jpg" % (self.output_path, i), roi)
+            cv2.imwrite("%spart-%02d.jpg" % (self.output_path, i + 1), roi)
             cv2.rectangle(img, (r.x1, r.y1), (r.x2, r.y2), (0, 0, 0), 2)
             cv2.rectangle(img, (r.x1, r.y1), (r.x2, r.y2), (255, 255, 255), 1)
         cv2.imwrite("%sresult.jpg" % self.output_path, img)
