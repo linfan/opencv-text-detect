@@ -1,17 +1,18 @@
 #!/usr/bin/python
 
 import sys
-
-import cv2
+from text_detect.io_handler import IoHandler
 from text_detect.rectangle_detector import RectangleDetector as Detector
 from text_detect.rectangle_merger import RectangleMerger as Merger
 
-if len(sys.argv) < 2:
-    print(' (ERROR) You must call this script with an argument (path_to_image_to_be_processed)\n')
-    quit()
+io_handler = IoHandler()
+try:
+    io_handler.parse_param(sys.argv)
+except IndexError:
+    io_handler.print_help_and_quit()
 
 # Load image
-img = cv2.imread(str(sys.argv[1]))
+img = io_handler.read_image()
 
 # Detect text
 detector = Detector()
@@ -21,10 +22,5 @@ rectangles = detector.find_all_text_rectangles(img)
 merger = Merger()
 rectangles = merger.merge_rectangle_list(rectangles)
 
-# Mark rectangles
-for r in rectangles:
-    cv2.rectangle(img, (r.x1, r.y1), (r.x2, r.y2), (0, 0, 0), 2)
-    cv2.rectangle(img, (r.x1, r.y1), (r.x2, r.y2), (255, 255, 255), 1)
-
 # Save result
-cv2.imwrite("result.jpg", img)
+io_handler.write_result(img, rectangles)
