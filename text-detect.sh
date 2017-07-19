@@ -15,9 +15,12 @@ echo "Write folder: ${OUT_DIR}"
 rm -fr ${OUT_DIR}
 python3 opencv_text_area_detect.py ${FILE_PATH} ${OUT_DIR}
 for part in `ls ${OUT_DIR}/part-*.jpg`; do
-    tesseract ${part} ${OUT_DIR}/result
-    echo "---- RESULT ----"
-    echo ${OUT_DIR}/result.txt | sed -e 's/^\s*//' -e 's/\s*$//' -e '/^$/d'
-    echo "----------------"
+    num=${part##*-}
+    tesseract ${part} ${OUT_DIR}/result-${num}
 done
+echo "---- RESULT ----"
+for part in `ls ${OUT_DIR}/result-*.jpg.txt`; do
+    cat ${part} | sed -e 's/^\s*//' -e 's/\s*$//' -e '/^$/d'
+done
+echo "----------------"
 cp ${FILE_PATH} ${OUT_DIR}/origin.${IMAGE_FORMAT}
