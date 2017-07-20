@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 import os
-import sys
 from text_detect.rectangle import Rectangle
 
 
