@@ -12,12 +12,12 @@ class RectangleDetector:
 
     def __init__(self):
         self.horizontal_only = True
-        self.thresholdDelta = 30
-        self.minArea = 0.00015
-        self.maxArea = 0.2
-        self.minProbability1 = 0.2
+        self.thresholdDelta = 10
+        self.minArea = 0.00002
+        self.maxArea = 0.001
+        self.minProbability1 = 0.9
         self.nonMaxSuppression = True
-        self.minProbabilityDiff = 0.2
+        self.minProbabilityDiff = 0.9
         self.minProbability2 = 0.9
 
     def _get_current_file_path(self):
