@@ -19,7 +19,7 @@ for part in `ls ${OUT_DIR}/part-*.jpg`; do
     tesseract ${part} ${OUT_DIR}/result-${num} --oem 1 --psm 13
     cat ${OUT_DIR}/result-${num}.txt >> ${OUT_DIR}/result.txt
 done
-cat ${OUT_DIR}/result.txt | gsed -e 's/^[^a-zA-Z0-9]*//' -e 's/[^a-zA-Z0-9]*$//' > ${OUT_DIR}/result.trim.txt
+cat ${OUT_DIR}/result.txt | sed -e 's/^[^a-zA-Z0-9]*//' -e 's/[^a-zA-Z0-9]*$//' > ${OUT_DIR}/result.trim.txt
 echo "---- RESULT ----"
 cat ${OUT_DIR}/result.trim.txt
 echo "----------------"
