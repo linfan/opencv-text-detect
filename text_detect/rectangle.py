@@ -24,6 +24,15 @@ class Rectangle:
     def from_2_pos(x1, y1, x2, y2):
         return Rectangle(x1, y1, x2 - x1, y2 - y1)
 
+    def get_height(self):
+        return self.y2 - self.y1
+
+    def get_width(self):
+        return self.x2 - self.x1
+
+    def get_area(self):
+        return self.get_width() * self.get_height()
+
     def __eq__(self, other):
         return self.x1 == other.x1 and self.x2 == other.x2 \
                and self.y1 == other.y1 and self.y2 == other.y2
