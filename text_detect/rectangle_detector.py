@@ -15,10 +15,10 @@ class RectangleDetector:
         self.thresholdDelta = 10
         self.minArea = 0.00002
         self.maxArea = 0.001
-        self.minProbability1 = 0.9
+        self.minProbability1 = 0.99
         self.nonMaxSuppression = True
-        self.minProbabilityDiff = 0.9
-        self.minProbability2 = 0.9
+        self.minProbabilityDiff = 0.99
+        self.minProbability2 = 0.99
 
     def _get_current_file_path(self):
         return os.path.split(os.path.realpath(__file__))[0]
