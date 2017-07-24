@@ -25,7 +25,7 @@ rectangles = merger.merge_rectangle_list(rectangles)
 
 # Select rectangles
 selector = Selector()
-rectangles = selector.select_fat_and_large_rectangles(rectangles)
+rectangles = selector.select_according_to_merged_times(rectangles)
 
 # Save result
 io_handler.write_result(img, rectangles)

@@ -2,13 +2,14 @@ import numpy as np
 
 
 class Rectangle:
-    def __init__(self, x, y=None, w=None, h=None):
+    def __init__(self, x, y=None, w=None, h=None, m=0):
         """
         rect [x, y, w, h]
         coordinate: (0,0) pos at top left
         (x1, y1): the top left pos
         (x2, y2): the bottom right pos
         """
+        self.merged_times = m
         if isinstance(x, list) or isinstance(x, np.ndarray):
             self.x1 = x[0]
             self.y1 = x[1]
@@ -21,8 +22,8 @@ class Rectangle:
             self.y2 = y + h
 
     @staticmethod
-    def from_2_pos(x1, y1, x2, y2):
-        return Rectangle(x1, y1, x2 - x1, y2 - y1)
+    def from_2_pos(x1, y1, x2, y2, m=0):
+        return Rectangle(x1, y1, x2 - x1, y2 - y1, m)
 
     def get_height(self):
         return self.y2 - self.y1
