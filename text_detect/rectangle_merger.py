@@ -7,6 +7,15 @@ class RectangleMerger:
         return not (rect_1.x2 < rect_2.x1 or rect_1.y2 < rect_2.y1
                     or rect_1.x1 > rect_2.x2 or rect_1.y1 > rect_2.y2)
 
+    def _is_horizontally_near_or_overlapped(self, rect_1, rect_2):
+        horizontal_distance_rate = 0.15
+        w_1 = (rect_1.x2 - rect_1.x1) * horizontal_distance_rate
+        w_2 = (rect_2.x2 - rect_2.x1) * horizontal_distance_rate
+        return (rect_2.x1 - w_2 < rect_1.x1 < rect_2.x2 + w_2) or \
+               (rect_2.x1 - w_2 < rect_1.x2 < rect_2.x2 + w_2) or \
+               (rect_1.x1 - w_1 < rect_2.x1 < rect_1.x2 + w_1) or \
+               (rect_1.x1 - w_1 < rect_2.x1 < rect_1.x2 + w_1)
+
     def _is_vertically_included(self, rect_1, rect_2):
         return (rect_2.y1 < rect_1.y1 and rect_2.y2 > rect_1.y2) or \
                (rect_1.y1 < rect_2.y1 and rect_1.y2 > rect_2.y2)
@@ -26,7 +35,7 @@ class RectangleMerger:
                rect_2.get_height() * max_vertical_diff_rate > rect_1.get_height()
 
     def _is_rectangles_overlapped_horizontally(self, rect_1, rect_2):
-        return self._is_rectangles_overlapped(rect_1, rect_2) and \
+        return self._is_horizontally_near_or_overlapped(rect_1, rect_2) and \
                self._is_height_of_rects_match(rect_1, rect_2) and \
                (self._is_vertically_near_eachother(rect_1, rect_2) or
                 self._is_vertically_included(rect_1, rect_2))
@@ -35,7 +44,8 @@ class RectangleMerger:
         return Rectangle.from_2_pos(rect_1.x1 < rect_2.x1 and rect_1.x1 or rect_2.x1,
                                     rect_1.y1 < rect_2.y1 and rect_1.y1 or rect_2.y1,
                                     rect_1.x2 > rect_2.x2 and rect_1.x2 or rect_2.x2,
-                                    rect_1.y2 > rect_2.y2 and rect_1.y2 or rect_2.y2)
+                                    rect_1.y2 > rect_2.y2 and rect_1.y2 or rect_2.y2,
+                                    rect_1.merged_times + rect_2.merged_times + 1)
 
     def _merge_rectangle_to_pool(self, rect_pool):
         new_pool = []
