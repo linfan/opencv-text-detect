@@ -1,5 +1,5 @@
 import cv2
-import os
+import text_detect.util as util
 from text_detect.rectangle import Rectangle
 
 
@@ -22,10 +22,6 @@ class IoHandler:
     def print_help_and_quit(self):
         print(' (ERROR) You must call this script with an argument (path_to_image_to_be_processed)\n')
         quit()
-
-    def _create_folder_if_not_exist(self, folder):
-        if not os.path.exists(folder):
-            os.makedirs(folder)
 
     def read_image(self):
         return cv2.imread(self.input_file)
@@ -54,6 +50,6 @@ class IoHandler:
         cv2.imwrite("%sresult.jpg" % self.output_path, img)
 
     def write_result(self, img, rectangles):
-        self._create_folder_if_not_exist(self.output_path)
+        util.create_folder_if_not_exist(self.output_path)
         self._write_roi_image(rectangles, img)
         self._write_marked_image(rectangles, img)
