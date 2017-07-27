@@ -3,6 +3,7 @@ FROM ubuntu:16.04
 ADD pkg/*.deb /pkg/
 ADD *.py /src/
 ADD text_detect /src/text_detect/
+ADD static /src/static/
 
 RUN apt-get update && \
     apt-get install -y python3 \
