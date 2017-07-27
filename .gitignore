@@ -7,3 +7,4 @@ __pycache__/
 *.patch
 bin/
 pkg/
+static/out/

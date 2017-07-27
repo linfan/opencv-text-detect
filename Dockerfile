@@ -8,6 +8,7 @@ ADD static /src/static/
 RUN apt-get update && \
     apt-get install -y python3 \
                        python3-pip \
+                       libglib3.0 \
                        libpng12-dev \
                        libjpeg8-dev \
                        libtiff5-dev \
