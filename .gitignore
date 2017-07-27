@@ -4,5 +4,6 @@ __pycache__/
 *.iml
 *.png
 *.jpg
+*.patch
 bin/
 pkg/

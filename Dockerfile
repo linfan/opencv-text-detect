@@ -1,6 +1,8 @@
 FROM ubuntu:16.04
 
 ADD pkg/*.deb /pkg/
+ADD *.py /src/
+ADD text_detect /src/text_detect/
 
 RUN apt-get update && \
     apt-get install -y python3 \
@@ -19,4 +21,11 @@ RUN apt-get update && \
     gdebi -n /pkg/tesseract-latest_*.deb
 
 RUN pip3 install opencv-python opencv-contrib-python flask
+
 ENV LD_LIBRARY_PATH /usr/local/lib:/usr/lib:/lib:/lib64
+ENV FLASK_APP text-detect.py
+ENV LC_ALL C.UTF-8
+ENV LANG C.UTF-8
+WORKDIR /src
+
+CMD flask run --host=0.0.0.0
