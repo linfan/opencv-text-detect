@@ -49,5 +49,5 @@ $ docker build -t t4 .
 
 ### 2.4 Start service
 ```bash
-$ docker run -dt --name t4 -p 5000:5000 -v <img-folder>:/img t4
+$ docker run -dt --name t4 -p 5000:5000 t4
 ```
