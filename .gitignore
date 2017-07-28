@@ -7,4 +7,6 @@ __pycache__/
 *.patch
 bin/
 pkg/
-static/out/
+static/
+!static/favicon.ico
+!static/res.html
