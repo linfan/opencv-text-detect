@@ -6,7 +6,8 @@ ADD text_detect /src/text_detect/
 ADD static /src/static/
 
 RUN apt-get update && \
-    apt-get install -y python3 \
+    apt-get install -y wget \
+                       python3 \
                        python3-pip \
                        libglib3.0 \
                        libpng12-dev \
@@ -23,6 +24,15 @@ RUN apt-get update && \
     gdebi -n /pkg/tesseract-latest_*.deb
 
 RUN pip3 install opencv-python opencv-contrib-python flask
+
+# osd: Orientation and script detection
+# equ: Math / Equation detection
+# eng: English
+# other languages: https://github.com/tesseract-ocr/tesseract/wiki/Data-Files
+ENV TESSDATA_PREFIX /usr/local/share/tessdata
+RUN wget -O ${TESSDATA_PREFIX}/osd.traineddata https://github.com/tesseract-ocr/tessdata/raw/master/osd.traineddata && \
+    wget -O ${TESSDATA_PREFIX}/equ.traineddata https://github.com/tesseract-ocr/tessdata/raw/master/equ.traineddata && \
+    wget -O ${TESSDATA_PREFIX}/eng.traineddata https://github.com/tesseract-ocr/tessdata/raw/master/eng.traineddata
 
 ENV LD_LIBRARY_PATH /usr/local/lib:/usr/lib:/lib:/lib64
 ENV FLASK_APP text-detect.py
