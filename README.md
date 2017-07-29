@@ -28,6 +28,7 @@ $ open result.jpg
 
 ```bash
 $ bash text-detect.sh /path/to/image.jpg
+$ cat /path/to/image/result.trim.txt
 ```
 
 ## 2. Build and run the service via docker

@@ -7,9 +7,7 @@ import socket
 import os
 import re
 from text_detect.io_handler import IoHandler
-from text_detect.rectangle_detector import RectangleDetector as Detector
-from text_detect.rectangle_merger import RectangleMerger as Merger
-from text_detect.rectangle_selector import RectangleSelector as Selector
+import text_detect_wrap
 import subprocess
 
 static_folder = 'static'
@@ -97,16 +95,5 @@ def detect_text_area(input_file, output_path):
         io_handler = IoHandler()
         io_handler.input_file = input_file
         io_handler.output_path = '%s/' % output_path
-        img = io_handler.read_image()
-        # Detect text area
-        detector = Detector()
-        rectangles = detector.find_all_text_rectangles(img)
-        # Merge rectangles
-        merger = Merger()
-        rectangles = merger.merge_rectangle_list(rectangles)
-        # Select rectangles
-        selector = Selector()
-        rectangles = selector.select_according_to_merged_times(rectangles)
-        # Save result
-        io_handler.write_result(img, rectangles)
+        text_detect_wrap.detect_text_area(io_handler)
     return '%s%s/result.jpg' % (request.url_root, output_path)
