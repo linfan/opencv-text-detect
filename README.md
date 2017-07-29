@@ -8,6 +8,7 @@ Searching text in a image, an opencv based text area detect tool.
 
 - Python 3.6
 - OpenCV 3.2
+- Tesseract 4.0 Alpha
 
 ### 1.2 Preparation
 
@@ -16,11 +17,17 @@ $ pip3 install opencv-python
 $ pip3 install opencv-contrib-python
 ```
 
-### 1.3 Detect text
+### 1.3 Detect text area only
 
 ```bash
-$ python3 opencv_text_area_detect.py /path/to/image.jpg
+$ python3 text_detect_wrap.py /path/to/image.jpg
 $ open result.jpg
+```
+
+### 1.4 Detect text content
+
+```bash
+$ bash text-detect.sh /path/to/image.jpg
 ```
 
 ## 2. Build and run the service via docker

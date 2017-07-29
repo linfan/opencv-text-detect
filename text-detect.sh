@@ -13,7 +13,7 @@ echo "Read image: ${FILE_PATH}"
 echo "Write folder: ${OUT_DIR}"
 
 rm -fr ${OUT_DIR}
-python3 opencv_text_area_detect.py ${FILE_PATH} ${OUT_DIR}
+python3 text_detect_wrap.py ${FILE_PATH} ${OUT_DIR}
 for part in `ls ${OUT_DIR}/part-*.jpg`; do
     num=${part##*-}
     tesseract ${part} ${OUT_DIR}/result-${num} --oem 1 --psm 13
