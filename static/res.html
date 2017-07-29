@@ -1,8 +1,16 @@
 <!doctype html>
 <title>Hello from Flask</title>
 {% if success %}
-  <div>{{ message }}</div>
+  <ul>
+  {% for msg in messages %}
+    <li>{{ msg }}</li>
+  {% endfor %}
+  </ul>
   <img src="{{ image }}" />
 {% else %}
-  <ul>{{ message }}</ul>
+  <ul>
+  {% for msg in messages %}
+    <li>{{ msg }}</li>
+  {% endfor %}
+  </ul>
 {% endif %}
