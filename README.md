@@ -36,8 +36,8 @@ $ cat /path/to/image/result.trim.txt
 
 ### 2.1 Generate tesseract packages
 ```bash
-$ docker build -t t4-pkg -f Dockerfile.pkg docker
-$ docker run --rm -it -v $(pwd)/docker:/pkg t4-pkg
+$ docker build -t t4-pkg -f docker/Dockerfile.pkg docker
+$ docker run --rm -it -v $(pwd)/docker/pkg:/pkg t4-pkg
 ```
 
 ### 2.2 Download extra packages
@@ -53,7 +53,7 @@ cd -
 
 ### 2.3 Build base image
 ```bash
-$ docker build -t t4-base -f Dockerfile.base docker
+$ docker build -t t4-base -f docker/Dockerfile.base docker
 ```
 
 ### 2.4 Build service image
