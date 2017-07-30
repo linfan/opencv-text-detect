@@ -28,6 +28,7 @@ def favicon():
 def hello(url):
     messages = []
     success = True
+    result_image_url = ''
 
     saved_image_name = url.split('/')[-1]
     saved_image_path = '%s/%s' % (static_folder, saved_image_name)
@@ -47,7 +48,7 @@ def hello(url):
             for part in part_txt_files:
                 messages.append(read_recognized_txt(part, output_folder))
 
-    return render_template('res.html', success=success, image=result_image_url, messages=messages)
+    return render_template('res.html', success=success, messages=messages, image=result_image_url)
 
 
 def read_recognized_txt(part, output_folder):
