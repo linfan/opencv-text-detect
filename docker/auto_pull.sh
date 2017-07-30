@@ -1,3 +1,7 @@
+#!/bin/bash
+# E.g. crontab -l
+# */3 * * * * /home/flin/opencv-text-detect/docker/auto_pull.sh /home/flin/opencv-text-detect
+
 if [ $# -lt 1 ]; then
     echo "Usage: ${0} <path-to-this-git-folder>"
     exit -1
