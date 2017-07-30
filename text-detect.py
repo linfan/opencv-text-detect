@@ -33,18 +33,19 @@ def hello(url):
     saved_image_path = '%s/%s' % (static_folder, saved_image_name)
     success, messages = download_image(saved_image_path, url, success, messages)
 
-    saved_image_name_without_postfix = saved_image_name.split('.')[0]
-    output_folder = '%s/%s' % (static_folder, saved_image_name_without_postfix)
-    result_image_url = detect_text_area(saved_image_path, output_folder)
-
-    part_image_files = ls_dir(output_folder, r'.*part-[0-9]+\.jpg')
-    for part in part_image_files:
-        success, messages = recognize_text(part, output_folder, success, messages)
-
     if success:
-        part_txt_files = ls_dir(output_folder, r'.*part-[0-9]+\.txt')
-        for part in part_txt_files:
-            messages.append(read_recognized_txt(part, output_folder))
+        saved_image_name_without_postfix = saved_image_name.split('.')[0]
+        output_folder = '%s/%s' % (static_folder, saved_image_name_without_postfix)
+        result_image_url = detect_text_area(saved_image_path, output_folder)
+
+        part_image_files = ls_dir(output_folder, r'.*part-[0-9]+\.jpg')
+        for part in part_image_files:
+            success, messages = recognize_text(part, output_folder, success, messages)
+
+        if success:
+            part_txt_files = ls_dir(output_folder, r'.*part-[0-9]+\.txt')
+            for part in part_txt_files:
+                messages.append(read_recognized_txt(part, output_folder))
 
     return render_template('res.html', success=success, image=result_image_url, messages=messages)
 
