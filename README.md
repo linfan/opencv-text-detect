@@ -63,9 +63,9 @@ $ docker build -t t4 .
 
 ### 2.5 Start service
 ```bash
-$ docker run -dt --name t4 -p 5000:5000 t4
+$ docker run -dt --name t4 -p 5050:5000 t4
 ```
 
 ### 2.6 View detect result in browser
 
-URL: `http://<IP>:5000/detect/<url-of-an-image-to-detect>`
+URL: `http://<IP>:5050/detect/<url-of-an-image-to-detect>`

@@ -16,7 +16,7 @@ if [ $? -eq 0 ]; then
         docker rmi t4
         docker build -t t4 .
         docker rm -f t4
-        docker run -dt --name t4 -p 6000:5000 t4
+        docker run -dt --name t4 -p 5050:5000 t4
         docker rmi t4-delete
     fi
 fi
