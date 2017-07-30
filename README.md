@@ -37,12 +37,12 @@ $ cat /path/to/image/result.trim.txt
 ### 2.1 Generate tesseract packages
 ```bash
 $ docker build -t t4-pkg -f docker/Dockerfile.pkg docker
-$ docker run --rm -it -v $(pwd)/docker/pkg:/pkg t4-pkg
+$ docker run --rm -it -v $(pwd)/docker:/pkg t4-pkg
 ```
 
 ### 2.2 Download extra packages
 ```bash
-cd docker/pkg
+cd docker
 wget http://ftp.us.debian.org/debian/pool/main/l/leptonlib/libleptonica-dev_1.74.1-1_amd64.deb
 wget http://ftp.us.debian.org/debian/pool/main/l/leptonlib/liblept5_1.74.1-1_amd64.deb
 wget http://ftp.us.debian.org/debian/pool/main/g/giflib/libgif7_5.1.4-0.4_amd64.deb
