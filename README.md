@@ -36,26 +36,36 @@ $ cat /path/to/image/result.trim.txt
 
 ### 2.1 Generate tesseract packages
 ```bash
-$ docker build -t t4cmp tesseract
-$ docker run --rm -it -v $(pwd):/pkg t4cmp
+$ docker build -t t4-pkg -f Dockerfile.pkg docker
+$ docker run --rm -it -v $(pwd)/docker:/pkg t4-pkg
 ```
 
 ### 2.2 Download extra packages
 ```bash
-cd pkg
+cd docker/pkg
 wget http://ftp.us.debian.org/debian/pool/main/l/leptonlib/libleptonica-dev_1.74.1-1_amd64.deb
 wget http://ftp.us.debian.org/debian/pool/main/l/leptonlib/liblept5_1.74.1-1_amd64.deb
 wget http://ftp.us.debian.org/debian/pool/main/g/giflib/libgif7_5.1.4-0.4_amd64.deb
 wget http://ftp.us.debian.org/debian/pool/main/libw/libwebp/libwebp6_0.5.2-1_amd64.deb
 wget http://ftp.us.debian.org/debian/pool/main/libj/libjpeg-turbo/libjpeg62-turbo_1.5.1-2_amd64.deb
+cd -
 ```
 
-### 2.3 Build service image
+### 2.3 Build base image
+```bash
+$ docker build -t t4-base -f Dockerfile.base docker
+```
+
+### 2.4 Build service image
 ```bash
 $ docker build -t t4 .
 ```
 
-### 2.4 Start service
+### 2.5 Start service
 ```bash
 $ docker run -dt --name t4 -p 5000:5000 t4
 ```
+
+### 2.6 View detect result in browser
+
+URL: `http://<IP>:5000/detect/<url-of-an-image-to-detect>`
