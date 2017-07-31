@@ -86,8 +86,8 @@ def download_image(saved_image_path, url, success, messages):
         try:
             socket.setdefaulttimeout(3)
             urllib.request.urlretrieve(url, saved_image_path)
-        except (urllib.error.HTTPError, urllib.error.URLError):
-            suc, msg = False, 'Failed to download image %s' % url
+        except urllib.error.URLError as e:
+            suc, msg = False, 'Failed to download image %s' % url + '. ' + e.reason
     return update_msg_and_suc(success, suc, messages, msg)
 
 
