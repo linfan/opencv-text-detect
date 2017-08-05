@@ -34,7 +34,9 @@ RUN apt-get update && \
 
 ENV FLASK_APP text-detect.py
 ENV LD_LIBRARY_PATH /usr/local/lib:/usr/lib:/lib:/lib64
+ENV APP_FOLDER /app
+ENV PATH $APP_FOLDER:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
-WORKDIR /src
+WORKDIR $APP_FOLDER
 
 CMD flask run --host=0.0.0.0
