@@ -11,12 +11,14 @@ import text_detect_wrap
 import subprocess
 
 static_folder = 'static'
+saved_image_folder = '%s/data' % static_folder
+short_url_prefix = 'p'
 app = Flask(__name__, template_folder=static_folder, static_url_path='/%s' % static_folder)
 
 
-@app.route('/p/<path:url>')
+@app.route('/%s/<path:url>' % short_url_prefix)
 def send_js(url):
-    return send_from_directory(static_folder, url)
+    return send_from_directory(saved_image_folder, url)
 
 
 @app.route('/favicon.ico')
@@ -31,13 +33,14 @@ def hello(url):
     result_image_url = ''
 
     saved_image_name = url.split('/')[-1]
-    saved_image_path = '%s/%s' % (static_folder, saved_image_name)
+    saved_image_path = '%s/%s' % (saved_image_folder, saved_image_name)
     success, messages = download_image(saved_image_path, url, success, messages)
 
     if success:
         saved_image_name_without_postfix = saved_image_name.split('.')[0]
-        output_folder = '%s/%s' % (static_folder, saved_image_name_without_postfix)
-        result_image_url = detect_text_area(saved_image_path, output_folder)
+        output_folder = '%s/%s' % (saved_image_folder, saved_image_name_without_postfix)
+        result_image_url = detect_text_area(saved_image_path, output_folder)\
+            .replace(saved_image_folder, short_url_prefix)
 
         part_image_files = ls_dir(output_folder, r'.*part-[0-9]+\.jpg')
         for part in part_image_files:
@@ -87,7 +90,7 @@ def download_image(saved_image_path, url, success, messages):
             socket.setdefaulttimeout(3)
             urllib.request.urlretrieve(url, saved_image_path)
         except urllib.error.URLError as e:
-            suc, msg = False, 'Failed to download image %s' % url + '. ' + e.reason
+            suc, msg = False, 'Failed to download image %s' % url + '. ' + e.__str__()
     return update_msg_and_suc(success, suc, messages, msg)
 
 

@@ -8,6 +8,5 @@ __pycache__/
 *.deb
 bin/
 pkg/
-static/
-!static/favicon.ico
-!static/res.html
+static/data
+!static/data/.gitkeep
