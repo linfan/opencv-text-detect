@@ -37,7 +37,7 @@ def hello(url):
     success, messages = download_image(saved_image_path, url, success, messages)
 
     if success:
-        saved_image_name_without_postfix = saved_image_name.split('.')[0]
+        saved_image_name_without_postfix = '.'.join(saved_image_name.split('.')[:-1])
         output_folder = '%s/%s' % (saved_image_folder, saved_image_name_without_postfix)
         result_image_url = detect_text_area(saved_image_path, output_folder)\
             .replace(saved_image_folder, short_url_prefix)
