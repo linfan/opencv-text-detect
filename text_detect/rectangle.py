@@ -2,14 +2,17 @@ import numpy as np
 
 
 class Rectangle:
-    def __init__(self, x, y=None, w=None, h=None, m=0):
+    def __init__(self, x, y=None, w=None, h=None, m=0, s=0):
         """
         rect [x, y, w, h]
         coordinate: (0,0) pos at top left
         (x1, y1): the top left pos
         (x2, y2): the bottom right pos
+        m: rect merged times, value 0~infinity
+        s: area size index, value 0~2
         """
         self.merged_times = m
+        self.area_size_index = s
         if isinstance(x, list) or isinstance(x, np.ndarray):
             self.x1 = x[0]
             self.y1 = x[1]
@@ -22,8 +25,8 @@ class Rectangle:
             self.y2 = y + h
 
     @staticmethod
-    def from_2_pos(x1, y1, x2, y2, m=0):
-        return Rectangle(x1, y1, x2 - x1, y2 - y1, m)
+    def from_2_pos(x1, y1, x2, y2, m=0, s=0):
+        return Rectangle(x1, y1, x2 - x1, y2 - y1, m, s)
 
     def get_height(self):
         return self.y2 - self.y1
@@ -33,6 +36,10 @@ class Rectangle:
 
     def get_area(self):
         return self.get_width() * self.get_height()
+
+    def set_area_size_index(self, s):
+        self.area_size_index = s
+        return self
 
     def __eq__(self, other):
         return self.x1 == other.x1 and self.x2 == other.x2 \

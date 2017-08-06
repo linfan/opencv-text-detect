@@ -21,3 +21,14 @@ class RectangleSelector:
     def select_according_to_merged_times(self, rectangles):
         rects = self._remove_slim_rectangles(rectangles)
         return sorted(rects, key=lambda r: r.merged_times, reverse=True)[:3]
+
+    def select_according_to_merged_times_and_area(self, rectangles):
+        rects = self._remove_slim_rectangles(rectangles)
+        top_merge_time_rects = sorted(rects, key=lambda r: r.merged_times * (1+r.area_size_index), reverse=True)[:3]
+        top_area_rect = sorted(rects, key=lambda r: r.get_area(), reverse=True)[0]
+        top_width_rect = sorted(rects, key=lambda r: r.get_width(), reverse=True)[0]
+        if top_area_rect not in top_merge_time_rects:
+            top_merge_time_rects[1] = top_area_rect
+        if top_width_rect not in top_merge_time_rects:
+            top_merge_time_rects[2] = top_width_rect
+        return top_merge_time_rects

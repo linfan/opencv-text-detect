@@ -18,7 +18,7 @@ def detect_text_area(io_handler):
     rectangles = merger.merge_rectangle_list(rectangles)
     # Select rectangles
     selector = Selector()
-    rectangles = selector.select_according_to_merged_times(rectangles)
+    rectangles = selector.select_according_to_merged_times_and_area(rectangles)
     # Save result
     io_handler.write_result(img, rectangles)
 
