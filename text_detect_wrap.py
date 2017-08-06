@@ -10,9 +10,13 @@ from text_detect.rectangle_selector import RectangleSelector as Selector
 def detect_text_area(io_handler):
     # Load image
     img = io_handler.read_image()
+    if img is None:
+        raise FileNotFoundError
     # Detect text area
     detector = Detector()
     rectangles = detector.find_all_text_rectangles(img)
+    if len(rectangles) == 0:
+        print("[Warning] Not text rectangle detected !!")
     # Merge rectangles
     merger = Merger()
     rectangles = merger.merge_rectangle_list(rectangles)
@@ -24,9 +28,10 @@ def detect_text_area(io_handler):
 
 
 if __name__ == '__main__':
-    ioHandler = IoHandler()
+    if len(sys.argv) < 2:
+        IoHandler.print_help_and_quit()
+    ioHandler = IoHandler(sys.argv[1], (len(sys.argv) > 2) and './' or sys.argv[2])
     try:
-        ioHandler.parse_param(sys.argv)
-    except IndexError:
-        ioHandler.print_help_and_quit()
-    detect_text_area(ioHandler)
+        detect_text_area(ioHandler)
+    except FileNotFoundError:
+        print("File %s not exist !!" % ioHandler.input_file)

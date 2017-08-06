@@ -23,6 +23,8 @@ class RectangleSelector:
         return sorted(rects, key=lambda r: r.merged_times, reverse=True)[:3]
 
     def select_according_to_merged_times_and_area(self, rectangles):
+        if len(rectangles) == 0:
+            return []
         rects = self._remove_slim_rectangles(rectangles)
         top_merge_time_rects = sorted(rects, key=lambda r: r.merged_times * (1+r.area_size_index), reverse=True)[:3]
         top_area_rect = sorted(rects, key=lambda r: r.get_area(), reverse=True)[0]

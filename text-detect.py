@@ -39,12 +39,16 @@ def hello(url):
     if success:
         saved_image_name_without_postfix = '.'.join(saved_image_name.split('.')[:-1])
         output_folder = '%s/%s' % (saved_image_folder, saved_image_name_without_postfix)
-        result_image_url = detect_text_area(saved_image_path, output_folder)\
-            .replace(saved_image_folder, short_url_prefix)
+        try:
+            result_image_url = detect_text_area(saved_image_path, output_folder) \
+                .replace(saved_image_folder, short_url_prefix)
+        except FileNotFoundError:
+            success, messages = False, "The downloaded file %s is not an image" % saved_image_path
 
-        part_image_files = ls_dir(output_folder, r'.*part-[0-9]+\.jpg')
-        for part in part_image_files:
-            success, messages = recognize_text(part, output_folder, success, messages)
+        if success:
+            part_image_files = ls_dir(output_folder, r'.*part-[0-9]+\.jpg')
+            for part in part_image_files:
+                success, messages = recognize_text(part, output_folder, success, messages)
 
         if success:
             part_txt_files = ls_dir(output_folder, r'.*part-[0-9]+\.txt')
@@ -96,9 +100,6 @@ def download_image(saved_image_path, url, success, messages):
 
 def detect_text_area(input_file, output_path):
     if not os.path.exists('%s/result.jpg' % output_path):
-        # Load image
-        io_handler = IoHandler()
-        io_handler.input_file = input_file
-        io_handler.output_path = '%s/' % output_path
+        io_handler = IoHandler(input_file, output_path)
         text_detect_wrap.detect_text_area(io_handler)
     return '%s%s/result.jpg' % (request.url_root, output_path)

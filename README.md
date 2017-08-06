@@ -20,15 +20,15 @@ $ pip3 install opencv-contrib-python
 ### 1.3 Detect text area only
 
 ```bash
-$ python3 text_detect_wrap.py /path/to/image.jpg
-$ open result.jpg
+$ python3 text_detect_wrap.py /path/to/image.jpg [out-put-folder]
+$ open result.jpg   # or out-put-folder/result.jpg
 ```
 
 ### 1.4 Detect text content
 
 ```bash
-$ bash text-detect.sh /path/to/image.jpg
-$ cat /path/to/image/result.trim.txt
+$ bash text-detect.sh /path/to/image.jpg [out-put-folder]
+$ cat /path/to/image/result.trim.txt   # or out-put-folder/result.trim.txt
 ```
 
 ## 2. Build and run the service via docker

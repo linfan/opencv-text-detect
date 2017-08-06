@@ -8,8 +8,8 @@ class Rectangle:
         coordinate: (0,0) pos at top left
         (x1, y1): the top left pos
         (x2, y2): the bottom right pos
-        m: rect merged times, value 0~infinity
-        s: area size index, value 0~2
+        m: rect merged times
+        s: area size index
         """
         self.merged_times = m
         self.area_size_index = s

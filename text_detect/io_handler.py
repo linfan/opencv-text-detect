@@ -4,22 +4,14 @@ from text_detect.rectangle import Rectangle
 
 
 class IoHandler:
-    def __init__(self):
-        self.input_file = None
-        self.output_path = None
+    def __init__(self, input_file, output_folder):
+        self.input_file = input_file
+        self.output_path = output_folder.endswith('/') and output_folder or "%s/" % output_folder
         self.width_margin_percent = 0.25
         self.height_margin_percent = 0.15
 
-    def parse_param(self, argv):
-        if len(argv) < 2:
-            raise IndexError
-        self.input_file = argv[1]
-        if len(argv) > 2:
-            self.output_path = argv[2].endswith('/') and argv[2] or "%s/" % argv[2]
-        else:
-            self.output_path = "./"
-
-    def print_help_and_quit(self):
+    @staticmethod
+    def print_help_and_quit():
         print(' (ERROR) You must call this script with an argument (path_to_image_to_be_processed)\n')
         quit()
 
