@@ -15,7 +15,8 @@ RUN apt update && \
                        libjpeg8-dev \
                        libtiff5-dev \
                        zlib1g-dev \
-                       gdebi-core && \
+                       gdebi-core \
+                       python-qt4 && \
     wget -q http://ftp.us.debian.org/debian/pool/main/l/leptonlib/libleptonica-dev_1.74.1-1_amd64.deb && \
     wget -q http://ftp.us.debian.org/debian/pool/main/l/leptonlib/liblept5_1.74.1-1_amd64.deb && \
     wget -q http://ftp.us.debian.org/debian/pool/main/g/giflib/libgif7_5.1.4-0.4_amd64.deb && \
